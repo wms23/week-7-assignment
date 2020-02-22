@@ -1,11 +1,7 @@
 <template>
   <div>
-    <form-group label="Email Address">
-      <input type="email" class="form-control" v-model="email" />
-    </form-group>
-    <form-group label="Password">
-      <input type="password" class="form-control" v-model="password" />
-    </form-group>
+    <text-input type="email" @my_change='email_change' name="email" label="Email Address :"></text-input>
+    <text-input type="password" @my_change='password_change' name="password" label="Password:"></text-input>
     <button class="btn btn-primary" @click="login">Login</button>
   </div>
 </template>
@@ -39,6 +35,12 @@ export default {
       else{
         alert("Fail to login");
       }        
+    },
+    email_change(content){
+      this.email = content;
+    },
+    password_change(content){
+      this.password = content
     }
   }
 };

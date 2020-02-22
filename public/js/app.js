@@ -2005,10 +2005,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2036,6 +2032,12 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         alert("Fail to login");
       }
+    },
+    email_change: function email_change(content) {
+      this.email = content;
+    },
+    password_change: function password_change(content) {
+      this.password = content;
     }
   }
 });
@@ -2129,7 +2131,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'placeholder', "value", "label"]
+  props: ['name', 'type', 'placeholder', "value", "label"],
+  methods: {
+    change: function change(event) {
+      this.$emit('my_change', event.target.value);
+    }
+  }
 });
 
 /***/ }),
@@ -37862,53 +37869,15 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("form-group", { attrs: { label: "Email Address" } }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.email,
-              expression: "email"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "email" },
-          domProps: { value: _vm.email },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.email = $event.target.value
-            }
-          }
-        })
-      ]),
+      _c("text-input", {
+        attrs: { type: "email", name: "email", label: "Email Address :" },
+        on: { my_change: _vm.email_change }
+      }),
       _vm._v(" "),
-      _c("form-group", { attrs: { label: "Password" } }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.password,
-              expression: "password"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "password" },
-          domProps: { value: _vm.password },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.password = $event.target.value
-            }
-          }
-        })
-      ]),
+      _c("text-input", {
+        attrs: { type: "password", name: "password", label: "Password:" },
+        on: { my_change: _vm.password_change }
+      }),
       _vm._v(" "),
       _c(
         "button",
@@ -38017,12 +37986,13 @@ var render = function() {
     _c("input", {
       staticClass: "form-control",
       attrs: {
-        type: "text",
+        type: _vm.type,
         id: _vm.name,
         name: _vm.name,
         placeholder: _vm.placeholder
       },
-      domProps: { value: _vm.value }
+      domProps: { value: _vm.value },
+      on: { change: _vm.change }
     })
   ])
 }
@@ -50886,9 +50856,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   created: function created() {
-    axios.defaults.headers.common = {
-      'Authorization': 'Bearer ' + this.$cookie.get('api_token')
-    };
+    if (this.$cookie.get('api_token') !== null) {
+      axios.defaults.headers.common = {
+        'Authorization': 'Bearer ' + this.$cookie.get('api_token')
+      };
+    }
   }
 });
 
