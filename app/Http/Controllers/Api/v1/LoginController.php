@@ -17,7 +17,12 @@ class LoginController extends Controller
         // dd($request->email, $request->password);
         $credentials = $request->only('email','password');
         if(\Auth::attempt($credentials)){
-            return \Auth::user();
+            $user =  \Auth::user();
+            $token = \Str::random(80);
+            $user->api_token = hash('sha256',$token);
+            $user->save();
+
+            return ['api_token'=>$token];
         }
         else{
             return "Login Fail";

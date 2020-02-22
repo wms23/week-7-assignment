@@ -10,6 +10,7 @@ $factory->define(Post::class, function (Faker $faker) {
         'title' => $faker->sentence(),
         'content' => $faker->paragraphs(4,true),
         'author_id' => \App\User::get()->random()->id,
+        'category_id' => \App\Category::get()->random()->id,
         'is_published' => $faker->boolean(70)
     ];
 });

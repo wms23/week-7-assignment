@@ -5,8 +5,10 @@
  */
 
 require('./bootstrap');
-
+const VueCookie = require("vue-cookie");
 window.Vue = require('vue');
+window.Vue.use(VueCookie)
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -39,6 +41,8 @@ Vue.component('login-form', require('./components/LoginForm.vue').default);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+import api_token_header from './components/mixins/api_token_header_for_axios';
+Vue.mixin(api_token_header);
 
 const app = new Vue({
     el: '#app',

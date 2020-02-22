@@ -8,23 +8,28 @@
   </div>
 </template>
 <script>
+
+// import api_token_header from './mixins/api_token_header_for_axios';
+
 export default {
+  // mixins : [api_token_header],
   data() {
     return {
       posts: [],
       meta: null,
-      links: null
+      links: null,
+      url : `/api/v1/post`
     };
   },
-  created() {
-    const token =
-      "AQ7Dms3Xl5Y2fAe9DMvNdxTlHJ7XcH6zZwpCEycZ9G2Ouv59g9UBciVf2fCM";
-    const url = `/api/v1/post?api_token=${token}`;
-    axios.get(url).then(response => {
+  created() {     
+    axios.get(this.url).then(this.init_data_handler);
+  },
+  methods: {
+    init_data_handler (response) {
       this.posts = response.data.data;
       this.meta = response.data.meta;
       this.links = response.data.links;
-    });
+    }
   }
 };
 </script>

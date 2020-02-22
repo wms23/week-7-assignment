@@ -14,30 +14,31 @@ export default {
   data() {
     return {
       email: null,
-      password: null
+      password: null,
+      login_url : "/api/v1/login/"
     };
   },
   methods: {
     login() {
-      console.log(this.email, this.password);
-      const login_url = "/api/v1/login/";
-
-      const bodyData = new FormData();
-      bodyData.set("email", this.email);
-      bodyData.set("password", this.password);
-
-      const payLoad = {
+        const payLoad = {
         email: this.email,
         password: this.password
       };
 
       axios({
         method: "POST",
-        url: login_url,
+        url: this.login_url,
         data: payLoad
-      }).then(response => {
-        console.log(response);
-      });
+      }).then(this.login_hander);
+    },
+    login_hander(response){
+      if(response.data.api_token){
+        this.$cookie.set('api_token',response.data.api_token);
+        window.location.href= "/jsapp/post";
+      }
+      else{
+        alert("Fail to login");
+      }        
     }
   }
 };
