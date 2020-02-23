@@ -39,3 +39,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+const VueCookie = require("vue-cookie");
+Vue.use(VueCookie)
