@@ -40,5 +40,5 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     encrypted: true
 // });
 
-const VueCookie = require("vue-cookie");
-Vue.use(VueCookie)
+
+
