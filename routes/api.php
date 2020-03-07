@@ -18,9 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('v1/login','Api\v1\LoginController@index');
+//->middleware('auth:api')
 
-Route::prefix('v1/')->middleware('auth:api')->namespace('Api\v1')->group(function () {
-    
+Route::prefix('v1/')->namespace('Api\v1')->group(function () {
+
 
     Route::apiResource('post', 'PostController');
 

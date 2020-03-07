@@ -1,3 +1,5 @@
+import PostDetail from "./components/PostDetail";
+
 require('./bootstrap');
 
 import Vue from 'vue'

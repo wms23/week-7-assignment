@@ -1,26 +1,24 @@
 <template>
     <div>
-        <h1>Post List will be here</h1>
-        <div v-for="post in posts" :key="post.id">
-            <h1><router-link :to="{ name: 'detail', params: {post_id: post.id} }">{{post.title}}</router-link></h1>
+        <h1>Post Detail</h1>
+        <h2>{{posts.title}}
+            <router-link :to="{ name: 'detail' ,params: {post_id: posts.id}}"> Edit</router-link>
+        </h2>
 
-
-            <p>{{post.excerpt}}</p>
-        </div>
+        <p>Written by : <strong>{{posts.author_name}}</strong></p>
+        <p>Created by : <strong>{{posts.created_at}}</strong></p>
+        <p>Is Published Post : <strong>{{posts.is_published ? 'Yes' : 'No' }}</strong></p>
+        <p>{!!posts.content!!}</p>
     </div>
 </template>
 <script>
-
-    // import api_token_header from './mixins/api_token_header_for_axios';
-
     export default {
-        // mixins : [api_token_header],
         data() {
             return {
-                posts: [],
+                posts: '',
                 meta: null,
                 links: null,
-                url: `/api/v1/post`
+                url: `/api/v1/post/${this.$route.params.post_id}`
             };
         },
         created() {

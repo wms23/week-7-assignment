@@ -23,7 +23,8 @@ class PostResource extends JsonResource
             'title' => $this->title,
             'content' => \nl2br($this->content),
             'author_name' => $this->author->name,
-            'is_published' => $this->is_published
+            'is_published' => $this->is_published,
+            'created_at' => $this->created_at
         ];
     }
 

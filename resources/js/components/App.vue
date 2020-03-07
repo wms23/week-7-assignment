@@ -4,7 +4,8 @@
 
         <p>
             <router-link :to="{ name: 'login' }">Login</router-link> |
-            <router-link :to="{ name: 'posts' }">Posts</router-link>
+            <router-link :to="{ name: 'posts' }">Posts</router-link> |
+            <router-link :to="{ name: 'create' }">Post Create</router-link>
         </p>
 
         <div class="container">

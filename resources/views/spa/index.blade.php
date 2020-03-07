@@ -22,8 +22,8 @@
 </head>
 <body>
     <div id="app" class="container">
-        <post-list></post-list>
-        <!-- <app></app> -->
+{{--        <watcher-sample></watcher-sample>--}}
+        <app></app>
     </div>
 </body>
 </html>
