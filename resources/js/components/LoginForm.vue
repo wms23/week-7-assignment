@@ -2,7 +2,7 @@
   <div>
     <text-input type="email" @my_change='email_change' name="email" label="Email Address :"></text-input>
     <text-input type="password" @my_change='password_change' name="password" label="Password:"></text-input>
-    <button class="btn btn-primary" @click="login">Login</button>
+    <button class="btn btn-primary"  k>Login</button>
   </div>
 </template>
 <script>

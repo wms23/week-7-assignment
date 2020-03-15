@@ -1,6 +1,6 @@
 <template>
   <form-group label="Caregory : ">
-    <select name="category_id">
+    <select name="category_id" @change="change">
       <option v-for="category in categories" :selected="value == category.id? true : false" :key="category.id" :value="category.id">{{category.name}}</option>
     </select>
   </form-group>
@@ -19,6 +19,11 @@ export default {
     axios.get(url).then(response => {
       this.categories = response.data;
     });
-  }
+  },
+  methods : {
+      change(event){
+        this.$emit('my_change',event.target.value);
+      }
+    }
 };
 </script>

@@ -1,10 +1,10 @@
 <template>
     <div>
-        <text-input name="title" @my_change='title_change' placeholder="Enter Title" label="Title :"></text-input>
-        <textarea-input name="content" @my_change='content_change' placeholder="Awesome Content Here" label="Content :"> </textarea-input>
+        <text-input name="title" @my_change="title_change" placeholder="Enter Title" label="Title :"></text-input>
+        <textarea-input name="content" @my_change="content_change" placeholder="Awesome Content Here" label="Content :"> </textarea-input>
         <form-group label="Publish Post : ">
-            <radio-item name="is_published" checked="true" label="Yes" id="is_published_yes" value="1"></radio-item>
-            <radio-item name="is_published" id="is_published_no" label="No" value="0"></radio-item>
+            <radio-item name="is_published" @my_change="radio_change" model="is_published" checked="true" label="Yes" id="is_published_yes" value="1"></radio-item>
+            <radio-item name="is_published" @my_change="radio_change" model="is_published" id="is_published_no" label="No" value="0"></radio-item>
         </form-group>
         <categories-select @my_change='category_id_change'></categories-select>
         <button class='btn btn-primary' @click="create">Save</button>
@@ -30,6 +30,7 @@
                     is_published : this.is_published,
                     category_id : this.category_id,
                 };
+                console.log(payLoad);
                 axios({
                     method: "POST",
                     url: this.post_url,
@@ -52,6 +53,9 @@
             },
             category_id_change(content){
                 this.category_id = content
+            },
+            radio_change(content){
+                this.is_published = content
             }
         }
     };

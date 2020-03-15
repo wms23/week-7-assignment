@@ -1,6 +1,6 @@
 <template>
   <div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" :checked="checked" :name="name" :id="id" :value="value" />
+    <input class="form-check-input" @change="change" type="radio" :checked="checked" :name="name" :id="id" :value="value" />
     <label class="form-check-label" :for="id">{{label}}</label>
   </div>
 </template>
@@ -12,8 +12,13 @@ export default {
     value: String,
     label : String,
     checked: {
-      default: false  
+      default: false
+    },
+  },
+    methods : {
+        change(event){
+            this.$emit('my_change',event.target.value);
+        }
     }
-  }
 };
 </script>

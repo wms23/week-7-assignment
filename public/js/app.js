@@ -1958,6 +1958,11 @@ __webpack_require__.r(__webpack_exports__);
     axios.get(url).then(function (response) {
       _this.categories = response.data;
     });
+  },
+  methods: {
+    change: function change(event) {
+      this.$emit('my_change', event.target.value);
+    }
   }
 });
 
@@ -2170,6 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
         is_published: this.is_published,
         category_id: this.category_id
       };
+      console.log(payLoad);
       axios({
         method: "POST",
         url: this.post_url,
@@ -2191,6 +2197,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     category_id_change: function category_id_change(content) {
       this.category_id = content;
+    },
+    radio_change: function radio_change(content) {
+      this.is_published = content;
     }
   }
 });
@@ -2311,6 +2320,11 @@ __webpack_require__.r(__webpack_exports__);
     checked: {
       "default": false
     }
+  },
+  methods: {
+    change: function change(event) {
+      this.$emit('my_change', event.target.value);
+    }
   }
 });
 
@@ -2356,7 +2370,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'placeholder', 'value', 'label']
+  props: ['name', 'placeholder', 'value', 'label'],
+  methods: {
+    change: function change(event) {
+      this.$emit('my_change', event.target.value);
+    }
+  }
 });
 
 /***/ }),
@@ -38055,7 +38074,7 @@ var render = function() {
   return _c("form-group", { attrs: { label: "Caregory : " } }, [
     _c(
       "select",
-      { attrs: { name: "category_id" } },
+      { attrs: { name: "category_id" }, on: { change: _vm.change } },
       _vm._l(_vm.categories, function(category) {
         return _c(
           "option",
@@ -38188,11 +38207,9 @@ var render = function() {
         on: { my_change: _vm.password_change }
       }),
       _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", on: { click: _vm.login } },
-        [_vm._v("Login")]
-      )
+      _c("button", { staticClass: "btn btn-primary", attrs: { k: "" } }, [
+        _vm._v("Login")
+      ])
     ],
     1
   )
@@ -38300,20 +38317,24 @@ var render = function() {
           _c("radio-item", {
             attrs: {
               name: "is_published",
+              model: "is_published",
               checked: "true",
               label: "Yes",
               id: "is_published_yes",
               value: "1"
-            }
+            },
+            on: { my_change: _vm.radio_change }
           }),
           _vm._v(" "),
           _c("radio-item", {
             attrs: {
               name: "is_published",
+              model: "is_published",
               id: "is_published_no",
               label: "No",
               value: "0"
-            }
+            },
+            on: { my_change: _vm.radio_change }
           })
         ],
         1
@@ -38466,7 +38487,8 @@ var render = function() {
     _c("input", {
       staticClass: "form-check-input",
       attrs: { type: "radio", name: _vm.name, id: _vm.id },
-      domProps: { checked: _vm.checked, value: _vm.value }
+      domProps: { checked: _vm.checked, value: _vm.value },
+      on: { change: _vm.change }
     }),
     _vm._v(" "),
     _c("label", { staticClass: "form-check-label", attrs: { for: _vm.id } }, [
@@ -38541,7 +38563,8 @@ var render = function() {
         placeholder: _vm.placeholder,
         rows: "6"
       },
-      domProps: { value: _vm.value }
+      domProps: { value: _vm.value },
+      on: { change: _vm.change }
     })
   ])
 }
